@@ -1,0 +1,17 @@
+[project]
+name = "client"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "rich>=13.9.4",
+    "typer>=0.15.1",
+    "uvloop>=0.21.0",
+    "websockets>=15.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.7",
+]
