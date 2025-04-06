@@ -15,3 +15,6 @@ dependencies = [
 dev = [
     "ruff>=0.9.7",
 ]
+
+[tool.ruff]
+indent-width = 2

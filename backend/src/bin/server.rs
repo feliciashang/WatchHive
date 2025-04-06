@@ -1,5 +1,5 @@
 use axum::{
-  extract::ws::{WebSocket, WebSocketUpgrade},
+  extract::ws::{Utf8Bytes, WebSocket, WebSocketUpgrade},
   response::IntoResponse,
   routing::any,
   Router,
@@ -43,8 +43,20 @@ async fn handle_socket(mut socket: WebSocket) {
     };
 
     tracing::debug!("received message: {:?}", msg);
+    let mut msg_str = match msg.into_text() {
+      Ok(utf) => utf.to_string(),
+      Err(err) => {
+        tracing::error!("failed to convert message to string: {}", err);
+        continue;
+      }
+    };
 
-    if let Err(err) = socket.send(msg).await {
+    msg_str += " from rust";
+
+    if let Err(err) = socket
+      .send(axum::extract::ws::Message::Text(Utf8Bytes::from(msg_str)))
+      .await
+    {
       tracing::error!("failed to send message: {}", err);
       return;
     }
