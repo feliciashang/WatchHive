@@ -1,12 +1,27 @@
-import './App.css'
+import React from 'react';
 
-async function App() {
-  let [tab] = await chrome.tabs.query({ active: true});
-  chrome.sidePanel.setOptions({
-    tabId: tab.id,                // Set the current tab's ID
-    path: 'sidepanel.html',        // Path to the HTML file for the side panel
-    enabled: true                  // Enable the side panel
-  });
-}
+const App: React.FC = () => {
+  const handleSkip = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const activeTabId = tabs[0]?.id;
+      if (!activeTabId) return;
 
-export default App
+      chrome.scripting.executeScript({
+        target: { tabId: activeTabId },
+        func: (skipTo: number) => {
+          const video = document.querySelector<HTMLVideoElement>('video');
+          if (video) video.currentTime = skipTo;
+        },
+        args: [10],
+      });
+    });
+  };
+
+  return (
+    <div>
+      <button onClick={handleSkip}>Skip to 10 Seconds</button>
+    </div>
+  );
+};
+
+export default App;

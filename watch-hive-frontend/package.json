@@ -19,6 +19,7 @@
     "@types/chrome": "^0.0.313",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.5.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^9.19.0",
     "eslint-plugin-react-hooks": "^5.0.0",

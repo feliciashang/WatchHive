@@ -3,5 +3,12 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",  // required for JSX
+    "lib": ["DOM", "ESNext"],
+    "module": "ESNext",
+    "target": "ES6",
+    "moduleResolution": "node"
+  }
 }

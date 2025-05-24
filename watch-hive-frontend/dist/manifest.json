@@ -4,12 +4,16 @@
     "version": "1.0.0",
     "description": "A simple React app as a Chrome extension",
     "action": {
-        "default_popup": "index.html"
+        "default_title": "Open Side Panel"
     },
     "permissions": [
         "scripting",
-        "sidePanel"
+        "sidePanel",
+        "tabs"
     ],
+    "background": {
+        "service_worker": "background.js"
+      },
     "host_permissions": [
         "http://*/*",
         "https://*/*"
